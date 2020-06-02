@@ -1,0 +1,10 @@
+.idea
+.idea/*
+__pycache__
+/features/
+/venv/
+/venv/*
+.venv/*
+/glove_embeddings/
+/glove_embeddings/*
+.glove/*
