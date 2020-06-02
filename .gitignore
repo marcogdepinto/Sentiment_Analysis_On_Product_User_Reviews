@@ -5,6 +5,5 @@ __pycache__
 /venv/
 /venv/*
 .venv/*
-/glove_embeddings/
-/glove_embeddings/*
-.glove/*
+/glove_embeddings/glove.6B
+/glove_embeddings/glove.6B/*
