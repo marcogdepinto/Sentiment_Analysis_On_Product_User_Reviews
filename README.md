@@ -1,10 +1,12 @@
-# ATE ABSITA FOR EVALITA 2020 - Sentiment analysis on product user reviews
+# Sentiment analysis on product user reviews
 
 **Executive Summary**
 
 Sentiment Analysis (or Opinion Mining) is the task of identifying what the user thinks about a particular piece of text. Sentiment analysis often takes the form of an annotation task with the purpose of annotating a portion of text with a positive, negative, or neutral label.
 
 In this Sentiment Analysis (SA) task, we built a deep learning classifier to predict the score assigned by a user associated to a product review (integer number from 1 to 5).
+
+This task has been completed to participate to ATE_ABSITA at EVALITA 2020: http://www.di.uniba.it/~swap/ate_absita/task.html#
 
 **Feature set information**
 
