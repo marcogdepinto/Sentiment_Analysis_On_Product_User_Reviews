@@ -34,7 +34,13 @@ We modeled the dataset using the following approach:
 
 1) ```dataframe_pipeline.py``` converts the ndjson input file into a pandas dataframe that is then saved into the joblib_not_processed_dataframe folder in joblib format.
 2) ```preprocessing.py``` loads the dataset created in step 1 and applies the first cleaning layer on the data by removing i) punctuation, ii) numbers, iii) single characters, iv) multiple spaces and V) stopwords. After the cleaning layer is completed, the output is again saved in joblib format in the joblib_processed_features folder;
-3) ```train.py``` makes the last part of preprocessing including applying glove word embeddings to create the feature matrices. The model is then saved into the ```models``` folder.
+3) ```train.py``` makes the last part of preprocessing including applying glove word embeddings to create the feature matrices. The model is then saved into the ```models``` folder. To run this, you need to download the glove word embeddings from https://nlp.stanford.edu/projects/glove/ and place the ```glove_embeddings``` unzipped folder into the main directory of the project. The expected format of the folder is
+
+```
+glove_embeddings
+--glove.6B
+----glove.6B.300d.txt
+```
 
 ```config.py``` gives the user the ability to choose if train a binary or a multiclass classifier by changing the value of the NUMBER_OF_CLASSES parameter:
 
