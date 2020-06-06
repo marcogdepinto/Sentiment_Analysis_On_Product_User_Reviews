@@ -26,9 +26,13 @@ Note that some reviews may not contain any aspect, but the final review score is
     score: 5
 }
 ```
-**Data augmentation**
+**Data augmentation - WIP**
 
-WIP
+Using reviews_scraper.py , I scraped additional reviews to be used for this scope.
+
+To run it: scrapy runspider /Users/marcogdepinto/PycharmProjects/ATE_ABSITA_for_EVALITA2020/reviews_scraper.py -o reviews.csv
+
+To improve the distribution of the datasets, I have then i) created a script to transform the list of files downloaded into a unique pandas dataframe and ii) removed all the reviews with score > 4.
 
 **How this works**
 

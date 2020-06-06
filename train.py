@@ -1,15 +1,14 @@
-import sys
 import joblib
 import pandas as pd
+import numpy as np
 from numpy import asarray
 from numpy import zeros
 import matplotlib.pyplot as plt
+from tensorflow.keras import backend as K
 from tensorflow.keras.layers import Flatten
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.layers import Embedding
-from sklearn.metrics import confusion_matrix
-from sklearn.metrics import classification_report
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
@@ -18,7 +17,6 @@ from config import TRAIN_PROCESSED_DATAFRAME_FILENAME
 from config import DEV_PROCESSED_DATAFRAME_FILENAME
 from config import EMBEDDINGS_PATH
 from config import EMBEDDINGS_FILENAME
-from config import NUMBER_OF_CLASSES
 from config import MODEL_PATH
 from config import MODEL_NAME
 
@@ -31,7 +29,6 @@ class Train:
         self.embeddings_path = EMBEDDINGS_PATH
         self.embeddings_filename = EMBEDDINGS_FILENAME
         self.embeddings_dictionary = dict()
-        self.number_of_classes = NUMBER_OF_CLASSES
 
     def task_3_dataframe_loader(self, dataframe_name) -> pd.DataFrame:
         """
@@ -51,24 +48,8 @@ class Train:
         """
 
         print('Starting to create X and y features..')
-
         X = self.dataframe['processed_sentence']
-
-        if self.number_of_classes == 2:
-            y = self.dataframe['score']
-            y = y.replace(1, 0)
-            y = y.replace(5, 1)
-            y = y.replace(4, 0)
-            y = y.replace(3, 0)
-            y = y.replace(2, 0)
-
-        elif self.number_of_classes == 5:
-            y = self.dataframe['score'] - 1
-
-        else:
-            print('NUMBER_OF_CLASSES in config.py can be only 2 or 5')
-            sys.exit(0)
-
+        y = self.dataframe['score']
         print('X and y features created.')
 
         return X, y
@@ -87,7 +68,8 @@ class Train:
         X_train = tokenizer.texts_to_sequences(X_train)
         X_test = tokenizer.texts_to_sequences(X_test)
 
-        glove_file = open(EMBEDDINGS_PATH + EMBEDDINGS_FILENAME, encoding="utf8")
+        # glove_file = open(EMBEDDINGS_PATH + EMBEDDINGS_FILENAME, encoding="utf8")
+        glove_file = open(EMBEDDINGS_PATH + '/cc.it.300.vec')
 
         for line in glove_file:
             records = line.split()
@@ -112,19 +94,25 @@ class Train:
 
         return embedding_matrix, vocab_size, X_train, X_test
 
+    @staticmethod
+    def root_mean_squared_error(y_train, y_test):
+        """
+        RMSE loss function
+        """
+        return K.sqrt(K.mean(K.square(y_test - y_train)))
+
+    @staticmethod
+    def rmse(predictions, targets):
+        """
+        RMSE evaluation function.
+        """
+        return np.sqrt(((predictions - targets) ** 2).mean())
+
     def model(self, embedding_matrix, vocab_size,
               X_train, y_train, X_test, y_test) -> tuple:
         """
         Trains the deep learning model and prints metrics.
         """
-
-        loss_function = 'sparse_categorical_crossentropy' if\
-            self.number_of_classes == 5 else 'binary_crossentropy'
-        dense_out = 5 if self.number_of_classes == 5 else 1
-
-        print('The loss that will be used is: ', loss_function)
-        print('The number of classes that will be used is ', self.number_of_classes)
-        print('The final dense layer that will be used is ', dense_out)
 
         model = Sequential()
         maxlen = 300
@@ -135,15 +123,16 @@ class Train:
                                     trainable=False)
         model.add(embedding_layer)
         model.add(Flatten())
-        model.add(Dense(dense_out, activation='softmax'))
+        model.add(Dense(1, activation='linear'))
+
         model.compile(optimizer='rmsprop',
-                      loss=loss_function,
-                      metrics=['accuracy'])
+                      loss=self.root_mean_squared_error,
+                      metrics=[self.root_mean_squared_error])
         print(model.summary())
 
         print('Starting model training..')
 
-        history = model.fit(X_train, y_train, batch_size=300, epochs=5, verbose=1, validation_split=0.2)
+        history = model.fit(X_train, y_train, batch_size=300, epochs=50, verbose=1, validation_split=0.2)
 
         # Loss plotting
         plt.plot(history.history['loss'])
@@ -155,29 +144,17 @@ class Train:
         plt.savefig('loss.png')
         plt.close()
 
-        # Accuracy plotting
-        plt.plot(history.history['acc'])
-        plt.plot(history.history['val_acc'])
-        plt.title('model accuracy')
-        plt.ylabel('acc')
-        plt.xlabel('epoch')
-        plt.legend(['train', 'test'], loc='upper left')
-        plt.savefig('accuracy.png')
+        predicts = model.predict(X_test)
 
-        score = model.evaluate(X_test, y_test, verbose=1)
+        predictions = []
 
-        print("Test Score:", score[0])
-        print("Test Accuracy:", score[1])
+        for a in predicts:
+            predictions.append(a[0])
 
-        predictions = model.predict_classes(X_test)
+        rmse_val = self.rmse(y_test, predictions)
+        print("RMS error is: " + str(rmse_val))
 
-        matrix = confusion_matrix(y_test, predictions)
-        print(matrix)
-
-        report = classification_report(y_test, predictions)
-        print(report)
-
-        model.save(MODEL_PATH + '/' + str(NUMBER_OF_CLASSES) + MODEL_NAME)
+        model.save(MODEL_PATH + '/' + MODEL_NAME)
 
         print('Routine completed.')
 

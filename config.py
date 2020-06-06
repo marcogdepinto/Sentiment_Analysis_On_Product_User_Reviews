@@ -16,8 +16,5 @@ DEV_PROCESSED_DATAFRAME_FILENAME = 'processed_dev_dataframe.joblib'
 EMBEDDINGS_PATH = './glove_embeddings/glove.6B'
 EMBEDDINGS_FILENAME = '/glove.6B.300d.txt'
 
-# Valid values: 2, 5.
-NUMBER_OF_CLASSES = 5
-
 MODEL_PATH = './models'
-MODEL_NAME = '_classes_model.h5'
+MODEL_NAME = 'model.h5'
