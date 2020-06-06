@@ -26,13 +26,9 @@ Note that some reviews may not contain any aspect, but the final review score is
     score: 5
 }
 ```
-**Data augmentation - WIP**
+**Data augmentation - WIP - DELETE REVIEWS_SCRAPER.PY BEFORE CHANGING THE REPO VISIBILITY TO PUBLIC**
 
-Using reviews_scraper.py , additional reviews have been downloaded to enrich the training set. 
-
-To run the review scraper: ```scrapy runspider /path/to/reviews_scraper.py -o reviews.csv```
-
-The additional reviews are stored in the ```additional_scraped_reviews``` folder. Each file includes the reviews of one ASIN (ID of the product on the website).
+Additional reviews have been downloaded to enrich the training set. Those reviews are stored in the ```additional_scraped_reviews``` folder. Each file includes the reviews of one product.
 
 **How this works**
 
