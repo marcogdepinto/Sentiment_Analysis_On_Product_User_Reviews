@@ -38,9 +38,10 @@ The additional reviews are stored in the ```additional_scraped_reviews``` folder
 
 We modeled the dataset using the following approach:
 
-1) ```dataframe_pipeline.py``` converts the ndjson input file into a pandas dataframe that is then saved into the joblib_not_processed_dataframe folder in joblib format.
-2) ```preprocessing.py``` loads the dataset created in step 1 and applies the first cleaning layer on the data by removing i) punctuation, ii) numbers, iii) single characters, iv) multiple spaces and V) stopwords. After the cleaning layer is completed, the output is again saved in joblib format in the joblib_processed_features folder;
-3) ```train.py``` makes the last part of preprocessing including applying word embeddings to create the feature matrices. The model is then saved into the ```models``` folder. To run this, you need to download the word embeddings from https://fasttext.cc/docs/en/crawl-vectors.html and place the ```glove_embeddings``` unzipped folder into the main directory of the project. The expected structure of the directory/folder is:
+1) ```dataframe_pipeline.py``` converts the ndjson input file into a pandas dataframe that is then saved into the joblib_not_processed_dataframe folder in joblib format;
+2) ```additional_features_preprocessing.py``` works on the product reviews added later to this dataset and stored in the ```additional_scraped_reviews``` folder;
+3) ```preprocessing.py``` loads the dataset created in step 1 and applies the first cleaning layer on the data by removing i) punctuation, ii) numbers, iii) single characters, iv) multiple spaces and V) stopwords. After the cleaning layer is completed, the output is again saved in joblib format in the joblib_processed_features folder;
+4) ```train.py``` makes the last part of preprocessing including applying word embeddings to create the feature matrices. The model is then saved into the ```models``` folder. To run this, you need to download the word embeddings from https://fasttext.cc/docs/en/crawl-vectors.html and place the ```glove_embeddings``` unzipped folder into the main directory of the project. The expected structure of the directory/folder is:
 
 ```
 embeddings
