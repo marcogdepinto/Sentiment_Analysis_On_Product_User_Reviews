@@ -18,3 +18,5 @@ EMBEDDINGS_FILENAME = '/cc.it.300.vec'
 
 MODEL_PATH = './models'
 MODEL_NAME = 'model.h5'
+
+ADDITIONAL_FEATURES_PATH = './additional_scraped_reviews'

@@ -7,3 +7,6 @@ __pycache__
 .venv/*
 /embeddings/
 /embeddings/*
+.mypy_cache
+/.mypy_cache/
+/.mypy_cache/*

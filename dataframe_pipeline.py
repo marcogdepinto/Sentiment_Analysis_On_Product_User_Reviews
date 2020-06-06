@@ -21,7 +21,7 @@ class DataframePipeline:
     def __init__(self):
         self.dataframe = pd.DataFrame()
 
-    def feature_loader(self, path):
+    def feature_loader(self, path: str) -> pd.DataFrame:
         """
         Function to create a dataframe from source files.
         """
@@ -36,7 +36,7 @@ class DataframePipeline:
 
         return self.dataframe
 
-    def save_dataframe_to_joblib(self, file_name):
+    def save_dataframe_to_joblib(self, file_name: str) -> None:
         """
         Function to save the created dataframe into a joblib file.
         """
