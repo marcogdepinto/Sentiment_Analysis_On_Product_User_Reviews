@@ -52,7 +52,7 @@ embeddings
 
 RMS error on the dev set with current model is: 1.253717763167156 (no data augmentation applied).
 
-With data augmentation (currently WIP) the model reached 1.2238927980125531 in the current version. Please note that the data augmentation is an ongoing process and will keep going on until the RMS stops improving.
+With data augmentation (currently WIP) the model reached 1.2238927980125531 in the current version. Please note that the data augmentation is an ongoing process that will keep going on until the RMS stops improving.
 
 ![](https://github.com/marcogdepinto/Sentiment_Analysis_On_Product_User_Reviews/blob/master/models/model.png)
 
