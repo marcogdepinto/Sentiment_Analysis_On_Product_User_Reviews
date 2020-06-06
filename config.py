@@ -13,8 +13,8 @@ PROCESSED_FEATURES_PATH = './joblib_processed_features'
 TRAIN_PROCESSED_DATAFRAME_FILENAME = 'processed_train_dataframe.joblib'
 DEV_PROCESSED_DATAFRAME_FILENAME = 'processed_dev_dataframe.joblib'
 
-EMBEDDINGS_PATH = './glove_embeddings/glove.6B'
-EMBEDDINGS_FILENAME = '/glove.6B.300d.txt'
+EMBEDDINGS_PATH = './embeddings/'
+EMBEDDINGS_FILENAME = '/cc.it.300.vec'
 
 MODEL_PATH = './models'
 MODEL_NAME = 'model.h5'

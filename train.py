@@ -69,7 +69,7 @@ class Train:
         X_test = tokenizer.texts_to_sequences(X_test)
 
         # glove_file = open(EMBEDDINGS_PATH + EMBEDDINGS_FILENAME, encoding="utf8")
-        glove_file = open(EMBEDDINGS_PATH + '/cc.it.300.vec')
+        glove_file = open(EMBEDDINGS_PATH + EMBEDDINGS_FILENAME)
 
         for line in glove_file:
             records = line.split()

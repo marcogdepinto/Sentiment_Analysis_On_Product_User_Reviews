@@ -4,7 +4,7 @@
 
 Sentiment Analysis (or Opinion Mining) is the task of identifying what the user thinks about a particular piece of text. Sentiment analysis often takes the form of an annotation task with the purpose of annotating a portion of text with a positive, negative, or neutral label.
 
-In this Sentiment Analysis (SA) task, we built a deep learning classifier to predict the score assigned by a user associated to a product review (integer number from 1 to 5).
+In this Sentiment Analysis (SA) task, we built a deep learning regression model able to predict the score assigned by a user in a product review.
 
 This task has been completed to participate to ATE_ABSITA at EVALITA 2020: http://www.di.uniba.it/~swap/ate_absita/task.html#
 
@@ -17,7 +17,7 @@ Note that some reviews may not contain any aspect, but the final review score is
 
 - TRAINING SET: 3054 reviews - ate_absita_training.ndjson - 1.1 MB
 - DEV SET: 109 reviews - ate_absita_dev.ndjson - 37 KB
-- TEST SET: 1200 reviews - ate_absita_test.ndjson - 322 KB
+- TEST SET: 1200 reviews - ate_absita_test.ndjson - 322 KB - *NOT YET RELEASED*
 
 *Feature example*
 ```
@@ -28,7 +28,7 @@ Note that some reviews may not contain any aspect, but the final review score is
 ```
 **Data augmentation - WIP**
 
-Using reviews_scraper.py , I scraped additional reviews to be used for this scope.
+Using reviews_scraper.py , I downloaded additional reviews to be used during model training.
 
 To run it: scrapy runspider /Users/marcogdepinto/PycharmProjects/ATE_ABSITA_for_EVALITA2020/reviews_scraper.py -o reviews.csv
 
@@ -40,23 +40,18 @@ We modeled the dataset using the following approach:
 
 1) ```dataframe_pipeline.py``` converts the ndjson input file into a pandas dataframe that is then saved into the joblib_not_processed_dataframe folder in joblib format.
 2) ```preprocessing.py``` loads the dataset created in step 1 and applies the first cleaning layer on the data by removing i) punctuation, ii) numbers, iii) single characters, iv) multiple spaces and V) stopwords. After the cleaning layer is completed, the output is again saved in joblib format in the joblib_processed_features folder;
-3) ```train.py``` makes the last part of preprocessing including applying glove word embeddings to create the feature matrices. The model is then saved into the ```models``` folder. To run this, you need to download the glove word embeddings from https://nlp.stanford.edu/projects/glove/ and place the ```glove_embeddings``` unzipped folder into the main directory of the project. The expected format of the folder is
+3) ```train.py``` makes the last part of preprocessing including applying word embeddings to create the feature matrices. The model is then saved into the ```models``` folder. To run this, you need to download the word embeddings from https://fasttext.cc/docs/en/crawl-vectors.html and place the ```glove_embeddings``` unzipped folder into the main directory of the project. The expected structure of the directory/folder is:
 
 ```
-glove_embeddings
---glove.6B
-----glove.6B.300d.txt
+embeddings
+--cc.it.300.vec
 ```
-
-```config.py``` gives the user the ability to choose if train a binary or a multiclass classifier by changing the value of the NUMBER_OF_CLASSES parameter:
-
-a) In case a binary classifier is chosen, the script will adjust the value of 5 reviews to 1 and change all the others (1,2,3,4) to zero (0);
-
-b) In case a multiclass classifier is chosen, the features are scaled by 1 (from 0 to 4) otherwise Keras will attempt to predict classes from 0 to 5 instead of 1 to 5.
 
 **Metrics**
 
-TBD after data augmentation. Baseline metrics stored in the ```metrics_2_classes``` and ```metrics_5_classes``` folders.
+RMS error on dev set with current model is: 1.2631936636993641 .
+
+![](https://github.com/marcogdepinto/Sentiment_Analysis_On_Product_User_Reviews/blob/master/loss.png)
 
 **License**
 
