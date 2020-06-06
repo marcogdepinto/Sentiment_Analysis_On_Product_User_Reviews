@@ -1,8 +1,11 @@
-# Importing Scrapy Library
+"""
+Credits for this scraper: https://blog.datahut.co/scraping-amazon-reviews-python-scrapy/
+This code comes without any warranty and the repository author is not responsible for its usage.
+"""
 import scrapy
 
 
-# Creating a new class to implement Spide
+# Creating a new class to implement Spider
 class AmazonReviewsSpider(scrapy.Spider):
     # Spider name
     name = 'amazon_reviews'
@@ -10,8 +13,8 @@ class AmazonReviewsSpider(scrapy.Spider):
     # Domain names to scrape
     allowed_domains = ['amazon.it']
 
-    # Base URL for the BOSE QuietComfort 35 II
-    myBaseUrl = "https://www.amazon.it/Smartphone-Fotocamere-Posteriori-Espandibili-Batteria/product-reviews/B084LF8C3T/ref=cm_cr_dp_d_show_all_btm?ie=UTF8&reviewerType=all_reviews&pageNumber='"
+    # Base URL for the product
+    myBaseUrl = "https://www.amazon.it/Mascherine-Traspiranti-Confortevoli-Anti-polvere-Confezione/product-reviews/B0868J3LB5/"
     start_urls = []
 
     # Creating list of urls to be scraped by appending page number a the end of base url

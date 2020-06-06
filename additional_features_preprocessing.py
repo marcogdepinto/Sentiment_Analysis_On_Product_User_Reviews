@@ -33,8 +33,8 @@ class AdditionalFeaturesProcessing:
         for file_name in glob.glob(self.features_path):
             data = pd.read_csv(file_name)
             self.tmp_list.append(data)
-            self.dataframe = self.dataframe.append(self.tmp_list)
-            self.dataframe['comment'].str.strip()
+        self.dataframe = self.dataframe.append(self.tmp_list)
+        self.dataframe['comment'].str.strip()
 
         return self.dataframe
 

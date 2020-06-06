@@ -30,7 +30,7 @@ Note that some reviews may not contain any aspect, but the final review score is
 
 Using reviews_scraper.py , additional reviews have been downloaded to enrich the training set. 
 
-To run the review scraper: scrapy runspider /Users/marcogdepinto/PycharmProjects/ATE_ABSITA_for_EVALITA2020/reviews_scraper.py -o reviews.csv
+To run the review scraper: scrapy runspider /path/to/reviews_scraper.py -o reviews.csv
 
 The additional reviews are stored in the ```additional_scraped_reviews``` folder. Each file includes the reviews of one ASIN (ID of the product on the website).
 
@@ -51,7 +51,7 @@ embeddings
 
 RMS error on the dev set with current model is: 1.253717763167156 (no data augmentation applied).
 
-With data augmentation (currently WIP) the model reached 1.2344529582041195 in the current version. Please note that the review scraping is an ongoing process and will keep going on until the RMS stops improving.
+With data augmentation (currently WIP) the model reached 1.2238927980125531 in the current version. Please note that the data augmentation is an ongoing process and will keep going on until the RMS stops improving.
 
 ![](https://github.com/marcogdepinto/Sentiment_Analysis_On_Product_User_Reviews/blob/master/models/model.png)
 
@@ -59,7 +59,7 @@ With data augmentation (currently WIP) the model reached 1.2344529582041195 in t
 
 **License**
 
-All material used and produced by the organizers of this evaluation task is released for non-commercial research purposes only. In this regard, no tools are provided to link the reviews released as datasets, to specific subjects on the web, or to trademarks and third parties. Furthermore, any use for statistical, propagandistic or advertising purposes of any kind is prohibited. It is not possible to modify, alter or enrich the data provided for the purposes of redistribution.
+All material used and produced by the organizers and the researcher for this evaluation task is released for non-commercial research purposes only. In this regard, no tools are provided to link the reviews released as datasets, to specific subjects on the web, or to trademarks and third parties. Furthermore, any use for statistical, propagandistic or advertising purposes of any kind is prohibited. It is not possible to modify, alter or enrich the data provided for the purposes of redistribution.
 
 Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License: http://creativecommons.org/licenses/by-nc-nd/4.0/
 
