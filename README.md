@@ -47,9 +47,11 @@ embeddings
 --cc.it.300.vec
 ```
 
-**Metrics**
+**Model used and metrics**
 
-RMS error on dev set with current model is: 1.2631936636993641 .
+RMS error on the dev set with current model is: 1.2631936636993641 (no data augmentation applied).
+
+![](https://github.com/marcogdepinto/Sentiment_Analysis_On_Product_User_Reviews/blob/master/models/model.png)
 
 ![](https://github.com/marcogdepinto/Sentiment_Analysis_On_Product_User_Reviews/blob/master/loss.png)
 
