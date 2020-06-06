@@ -163,7 +163,7 @@ class Train:
             predictions.append(pred[0])
 
         rmse_val = self.rmse(tmp_y_test, predictions)
-        print("RMS error is: " + str(rmse_val))
+        print("RMS error is on the test set is: " + str(rmse_val))
 
         model.save(MODEL_PATH + '/' + MODEL_NAME)
 

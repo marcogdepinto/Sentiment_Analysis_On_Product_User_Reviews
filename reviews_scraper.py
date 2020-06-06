@@ -11,7 +11,7 @@ class AmazonReviewsSpider(scrapy.Spider):
     allowed_domains = ['amazon.it']
 
     # Base URL for the BOSE QuietComfort 35 II
-    myBaseUrl = "https://www.amazon.it/Bose-Noise-Cancelling-Headphones-Black/product-reviews/B07Q9MJKBV/ref=cm_cr_dp_d_show_all_btm?ie=UTF8&reviewerType=all_reviews&pageNumber="
+    myBaseUrl = "https://www.amazon.it/Smartphone-Fotocamere-Posteriori-Espandibili-Batteria/product-reviews/B084LF8C3T/ref=cm_cr_dp_d_show_all_btm?ie=UTF8&reviewerType=all_reviews&pageNumber='"
     start_urls = []
 
     # Creating list of urls to be scraped by appending page number a the end of base url

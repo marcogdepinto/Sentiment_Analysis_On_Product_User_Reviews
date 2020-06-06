@@ -28,11 +28,11 @@ Note that some reviews may not contain any aspect, but the final review score is
 ```
 **Data augmentation - WIP**
 
-Using reviews_scraper.py , I downloaded additional reviews to be used during model training.
+Using reviews_scraper.py , additional reviews have been downloaded to enrich the training set. 
 
-To run it: scrapy runspider /Users/marcogdepinto/PycharmProjects/ATE_ABSITA_for_EVALITA2020/reviews_scraper.py -o reviews.csv
+To run the review scraper: scrapy runspider /Users/marcogdepinto/PycharmProjects/ATE_ABSITA_for_EVALITA2020/reviews_scraper.py -o reviews.csv
 
-To improve the distribution of the datasets, I have then i) created a script to transform the list of files downloaded into a unique pandas dataframe and ii) removed all the reviews with score > 4.
+The additional reviews are stored in the ```additional_scraped_reviews``` folder. Each file includes the reviews of one ASIN (ID of the product on the website).
 
 **How this works**
 
@@ -49,7 +49,9 @@ embeddings
 
 **Model used and metrics**
 
-RMS error on the dev set with current model is: 1.2631936636993641 (no data augmentation applied).
+RMS error on the dev set with current model is: 1.253717763167156 (no data augmentation applied).
+
+With data augmentation (currently WIP) the model reached 1.2344529582041195 in the current version. Please note that the review scraping is an ongoing process and will keep going on until the RMS stops improving.
 
 ![](https://github.com/marcogdepinto/Sentiment_Analysis_On_Product_User_Reviews/blob/master/models/model.png)
 

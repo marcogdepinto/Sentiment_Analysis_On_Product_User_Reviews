@@ -20,3 +20,5 @@ MODEL_PATH = './models'
 MODEL_NAME = 'model.h5'
 
 ADDITIONAL_FEATURES_PATH = './additional_scraped_reviews'
+ADDITIONAL_FEATURES_DF_JOBLIB_PATH = './joblib_additional_reviews'
+ADDITIONAL_FEATURES_DF_JOBLIB_FILE_NAME = '/additional_features.joblib'

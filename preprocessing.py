@@ -13,6 +13,8 @@ from config import CLEAN_DATAFRAME_PATH
 from config import PROCESSED_FEATURES_PATH
 from config import TRAIN_DATAFRAME_FILE_NAME
 from config import DEV_DATAFRAME_FILE_NAME
+from config import ADDITIONAL_FEATURES_DF_JOBLIB_PATH
+from config import ADDITIONAL_FEATURES_DF_JOBLIB_FILE_NAME
 
 
 class Preprocessing:
@@ -25,8 +27,11 @@ class Preprocessing:
     def __init__(self):
         self.dataframe_path = CLEAN_DATAFRAME_PATH
         self.dataframe = pd.DataFrame()
+        self.extended_dataframe = pd.DataFrame()
+        self.joblib_features_path = ADDITIONAL_FEATURES_DF_JOBLIB_PATH
+        self.joblib_features_filename = ADDITIONAL_FEATURES_DF_JOBLIB_FILE_NAME
 
-    def task_3_dataframe_loader(self, dataframe_name) -> pd.DataFrame:
+    def task_3_dataframe_loader(self, dataframe_name: str) -> pd.DataFrame:
         """
         Loading the data. As the scope is task 3 of EVALITA,
         columns not needed for sentiment analysis are dropped.
@@ -38,8 +43,19 @@ class Preprocessing:
                                                       'aspects'])
         return self.dataframe
 
+    def load_additional_reviews_dataframe(self) -> pd.DataFrame:
+        """
+        Load and merge the dataframe created from the additional
+        scraped reviews with the one created here.
+        """
+        self.extended_dataframe = joblib.load(self.joblib_features_path + self.joblib_features_filename)
+
+        self.dataframe = pd.concat([self.dataframe, self.extended_dataframe])
+        self.dataframe = self.dataframe.reset_index(drop=True)
+        return self.dataframe
+
     @staticmethod
-    def preprocess_text(dataframe, replace_column) -> pd.DataFrame:
+    def preprocess_text(dataframe: pd.DataFrame, replace_column: pd.Series) -> pd.DataFrame:
         """
         Removes punctuation, numbers, single characters,
         multiple spaces and stopwords.
@@ -71,7 +87,12 @@ class Preprocessing:
 
         return dataframe
 
-    def save_dataframe_to_joblib(self, file_name):
+    def show_distinct_count_of_scores(self):
+        score_distribution = self.dataframe.groupby('score')['processed_sentence'].nunique()
+        print(score_distribution)
+        return score_distribution
+
+    def save_dataframe_to_joblib(self, file_name: str) -> None:
         """
         Function to save the created dataframe into a joblib file.
         """
@@ -80,12 +101,13 @@ class Preprocessing:
 
 
 if __name__ == '__main__':
-
     PREPROCESSING_TRAIN = Preprocessing()
     # Loading train dataframe
     TRAIN_DATAFRAME = PREPROCESSING_TRAIN.task_3_dataframe_loader(TRAIN_DATAFRAME_FILE_NAME)
     # Creating a new column elaborated column: processed_sentence
     TRAIN_PROCESSED_DATAFRAME = PREPROCESSING_TRAIN.preprocess_text(TRAIN_DATAFRAME, 'sentence')
+    ADD_EXTENSION_DATAFRAME = PREPROCESSING_TRAIN.load_additional_reviews_dataframe()
+    SHOW_SCORE_DISTRIBUTION = PREPROCESSING_TRAIN.show_distinct_count_of_scores()
     PREPROCESSING_TRAIN.save_dataframe_to_joblib('processed_' + TRAIN_DATAFRAME_FILE_NAME)
 
     PREPROCESSING_DEV = Preprocessing()
