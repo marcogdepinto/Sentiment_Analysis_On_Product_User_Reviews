@@ -23,7 +23,6 @@ class Preprocessing:
     2) Preprocessing text input (stopwords, punctuations, spaces and so on)
     3) Creating a new joblib with the processed feature set
     """
-
     def __init__(self):
         self.dataframe_path = CLEAN_DATAFRAME_PATH
         self.dataframe = pd.DataFrame()
@@ -60,7 +59,6 @@ class Preprocessing:
         Removes punctuation, numbers, single characters,
         multiple spaces and stopwords.
         """
-
         dataframe_column = dataframe[replace_column].tolist()
         new_values_list = list()
 
@@ -87,17 +85,21 @@ class Preprocessing:
 
         return dataframe
 
-    def show_distinct_count_of_scores(self):
+    def show_distinct_count_of_scores(self) -> pd.Series:
+        """
+        Check class distribution (how much reviews the dataset includes for each possible score.
+        """
         score_distribution = self.dataframe.groupby('score')['processed_sentence'].nunique()
         print(score_distribution)
         return score_distribution
 
-    def save_dataframe_to_joblib(self, file_name: str) -> None:
+    def save_dataframe_to_joblib(self, file_name: str) -> pd.DataFrame:
         """
         Function to save the created dataframe into a joblib file.
         """
         print('Calling dataframe from word processing', self.dataframe)
         joblib.dump(self.dataframe, os.path.join(PROCESSED_FEATURES_PATH, file_name))
+        return self.dataframe
 
 
 if __name__ == '__main__':

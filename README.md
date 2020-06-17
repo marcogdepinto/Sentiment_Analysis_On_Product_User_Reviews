@@ -4,7 +4,7 @@
 
 Sentiment Analysis (or Opinion Mining) is the task of identifying what the user thinks about a particular piece of text. Sentiment analysis often takes the form of an annotation task with the purpose of annotating a portion of text with a positive, negative, or neutral label.
 
-In this Sentiment Analysis (SA) task, we built a deep learning regression model able to predict the score assigned by a user in a product review.
+In this Sentiment Analysis (SA) task, the presented deep learning regression model is able to predict the score assigned by a user in a product review.
 
 This task has been completed to participate to ATE_ABSITA at EVALITA 2020: http://www.di.uniba.it/~swap/ate_absita/task.html#
 
@@ -32,7 +32,7 @@ Additional reviews have been downloaded to enrich the training set. Those review
 
 **How this works**
 
-We modeled the dataset using the following approach:
+The dataset is modeled using the following approach:
 
 1) ```dataframe_pipeline.py``` converts the ndjson input file into a pandas dataframe that is then saved into the joblib_not_processed_dataframe folder in joblib format;
 2) ```additional_features_preprocessing.py``` works on the product reviews added later to this dataset and stored in the ```additional_scraped_reviews``` folder;
@@ -46,9 +46,7 @@ embeddings
 
 **Model used and metrics**
 
-RMS error on the dev set with current model is: 1.253717763167156 (no data augmentation applied).
-
-With data augmentation (currently WIP) the model reached 1.2238927980125531 in the current version. Please note that the data augmentation is an ongoing process that will keep going on until the RMS stops improving.
+RMS error on the dev set with the current model and data augmentation is 0.9933196554688805. Please note that the data augmentation is an ongoing process that will keep going on until the RMS stops improving.
 
 ![](https://github.com/marcogdepinto/Sentiment_Analysis_On_Product_User_Reviews/blob/master/models/model.png)
 

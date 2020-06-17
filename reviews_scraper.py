@@ -14,11 +14,11 @@ class AmazonReviewsSpider(scrapy.Spider):
     allowed_domains = ['amazon.it']
 
     # Base URL for the product
-    myBaseUrl = "https://www.amazon.it/Mascherine-Traspiranti-Confortevoli-Anti-polvere-Confezione/product-reviews/B0868J3LB5/"
+    myBaseUrl = "https://www.amazon.it/product-reviews/B07LF9M6JH/ref=cm_cr_arp_d_paging_btm_next_1?pageNumber="
     start_urls = []
 
     # Creating list of urls to be scraped by appending page number a the end of base url
-    for i in range(1, 121):
+    for i in range(1, 250):
         start_urls.append(myBaseUrl + str(i))
 
     # Defining a Scrapy parser

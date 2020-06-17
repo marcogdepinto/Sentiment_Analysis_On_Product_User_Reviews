@@ -36,12 +36,13 @@ class DataframePipeline:
 
         return self.dataframe
 
-    def save_dataframe_to_joblib(self, file_name: str) -> None:
+    def save_dataframe_to_joblib(self, file_name: str) -> pd.DataFrame:
         """
         Function to save the created dataframe into a joblib file.
         """
         print('Calling dataframe from word processing', self.dataframe)
         joblib.dump(self.dataframe, os.path.join(CLEAN_DATAFRAME_PATH, file_name))
+        return self.dataframe
 
 
 if __name__ == '__main__':

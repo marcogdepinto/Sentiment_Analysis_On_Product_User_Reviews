@@ -17,12 +17,11 @@ class AdditionalFeaturesProcessing:
     """
     Additional features scraping and preparation.
     """
-
     def __init__(self):
         self.features_path = ADDITIONAL_FEATURES_PATH + '/*.csv'
         self.joblib_features_path = ADDITIONAL_FEATURES_DF_JOBLIB_PATH
         self.joblib_features_filename = ADDITIONAL_FEATURES_DF_JOBLIB_FILE_NAME
-        self.dataframe = pd.DataFrame()
+        self.dataframe = pd.DataFrame(columns=['stars', 'comment'])
         self.tmp_list = list()
 
     def feature_loader(self) -> pd.DataFrame:
@@ -32,10 +31,9 @@ class AdditionalFeaturesProcessing:
         """
         for file_name in glob.glob(self.features_path):
             data = pd.read_csv(file_name)
-            self.tmp_list.append(data)
-        self.dataframe = self.dataframe.append(self.tmp_list)
+            self.dataframe = self.dataframe.append(data)
+        self.dataframe = self.dataframe.reset_index(drop=True)
         self.dataframe['comment'].str.strip()
-
         return self.dataframe
 
     def data_cleaner(self) -> pd.DataFrame:
@@ -57,6 +55,8 @@ class AdditionalFeaturesProcessing:
 
     def five_stars_remover(self) -> pd.DataFrame:
         """
+        NOT USED ANYMORE AS THE MODEL IMPROVES BETTER IF DATA KEEPS BEING SKEWED.
+
         Function to remove the 5 stars reviews from the additional data.
         This is needed as the dataset is unbalanced (very high on 5 stars review).
         Hence, we want to increment the amount of 1-4 stars reviews only.
@@ -77,12 +77,21 @@ class AdditionalFeaturesProcessing:
                               inplace=True)
         return self.dataframe
 
-    def save_dataframe_to_joblib(self) -> None:
+    def show_distinct_count_of_scores(self):
+        """
+        Check class distribution (how much reviews the dataset includes for each possible score.
+        """
+        score_distribution = self.dataframe.groupby('score')['processed_sentence'].nunique()
+        print(score_distribution)
+        return score_distribution
+
+    def save_dataframe_to_joblib(self) -> pd.DataFrame:
         """
         Function to save the created dataframe into a joblib file.
         """
         print('Calling dataframe from word processing', self.dataframe)
         joblib.dump(self.dataframe, self.joblib_features_path + self.joblib_features_filename)
+        return self.dataframe
 
 
 if __name__ == '__main__':
@@ -90,6 +99,7 @@ if __name__ == '__main__':
     PROCESSING.feature_loader()
     PROCESSING.data_cleaner()
     PROCESSING.stars_column_int_converter()
-    PROCESSING.five_stars_remover()
+    # PROCESSING.five_stars_remover()
     PROCESSING.rename_dataframe_columns()
+    PROCESSING.show_distinct_count_of_scores()
     PROCESSING.save_dataframe_to_joblib()
