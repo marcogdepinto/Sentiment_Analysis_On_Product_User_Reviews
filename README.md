@@ -26,7 +26,7 @@ Note that some reviews may not contain any aspect, but the final review score is
     score: 5
 }
 ```
-**Data augmentation - WIP - DELETE REVIEWS_SCRAPER.PY BEFORE CHANGING THE REPO VISIBILITY TO PUBLIC**
+**Data augmentation**
 
 Additional reviews have been downloaded to enrich the training set. Those reviews are stored in the ```additional_scraped_reviews``` folder. Each file includes the reviews of one product.
 
@@ -46,7 +46,7 @@ embeddings
 
 **Model used and metrics**
 
-RMS error on the dev set with the current model and data augmentation is 0.9933196554688805. Please note that the data augmentation is an ongoing process that will keep going on until the RMS stops improving.
+RMS error on the dev set with the current model and data augmentation is 0.9978965872313215 (competition baseline: 1.004)
 
 ![](https://github.com/marcogdepinto/Sentiment_Analysis_On_Product_User_Reviews/blob/master/models/model.png)
 

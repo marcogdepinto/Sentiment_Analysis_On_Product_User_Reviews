@@ -1,6 +1,7 @@
 """
 Configuration file: includes constants, paths and other information.
 """
+import os
 
 TRAINING_SET_PATH = './ATE_ABSITA_training_set/ate_absita_training.ndjson'
 DEV_SET_PATH = './ATE_ABSITA_dev_set/ate_absita_dev.ndjson'

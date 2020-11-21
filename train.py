@@ -50,8 +50,7 @@ class Train:
 
     def create_x_y_features(self) -> tuple:
         """
-        Scaling the reviews from 0 to 4. This is needed as
-        Keras models classify starting from 0 and not from one.
+        Creating training and test series.
         :return: x, y
         """
 
