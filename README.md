@@ -28,7 +28,7 @@ Note that some reviews may not contain any aspect, but the final review score is
 ```
 **Data augmentation**
 
-The original dataset has been enriched with a limited number of additional product reviews to beat the baseline. The product reviews are not available for download in this repository but the selection of products is respective of the domain requested by the challenge.
+The original dataset has been enriched with a limited number of additional product reviews to beat the baseline. The product reviews are available in the ```additional_scraped_reviews``` folder. 
 
 **How this works**
 
