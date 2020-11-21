@@ -28,7 +28,7 @@ Note that some reviews may not contain any aspect, but the final review score is
 ```
 **Data augmentation**
 
-Additional reviews have been downloaded to enrich the training set. Those reviews are stored in the ```additional_scraped_reviews``` folder. Each file includes the reviews of one product.
+The original dataset has been enriched with a limited number of additional product reviews to beat the baseline. The product reviews are not available for download in this repository but the selection of products is respective of the domain requested by the challenge.
 
 **How this works**
 
